@@ -30,12 +30,14 @@ namespace engine
 
 	void vector4::multiply(matrix4& m, vector4& v)
 	{
+		m.update_rdata();
+
 		__m128 vector = _mm_set_ps(v.x, v.y, v.z, v.w);
 
-		__m128 r0 = _mm_mul_ps(m.data[0], vector);
-		__m128 r1 = _mm_mul_ps(m.data[1], vector);
-		__m128 r2 = _mm_mul_ps(m.data[2], vector);
-		__m128 r3 = _mm_mul_ps(m.data[3], vector);
+		__m128 r0 = _mm_mul_ps(m.rdata[0], vector);
+		__m128 r1 = _mm_mul_ps(m.rdata[1], vector);
+		__m128 r2 = _mm_mul_ps(m.rdata[2], vector);
+		__m128 r3 = _mm_mul_ps(m.rdata[3], vector);
 
 		float ra0[4];
 		float ra1[4];

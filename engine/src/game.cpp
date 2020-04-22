@@ -100,9 +100,9 @@ namespace engine
 		//r.translate_cube(c1, vector3(sin(glfwGetTime()) / 1000, 0.0f, 0.0f));
 		//std::cout << delta_time << std::endl;
 
-		r.rotate_x_cube(c1, 1 * delta_time);
-		r.rotate_y_cube(c1, 1 * delta_time);
-		r.rotate_z_cube(c1, 1 * delta_time);
+		//r.rotate_x_cube(c1, 1 * delta_time);
+		//r.rotate_y_cube(c1, 1 * delta_time);
+		//r.rotate_z_cube(c1, 1 * delta_time);
 	}
 	void game::draw()
 	{

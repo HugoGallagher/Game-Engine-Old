@@ -110,6 +110,9 @@ namespace engine
 		vt_matrix.multiply(c.v_matrix, t_matrix);
 		vt_matrix.update_data_gl();
 
+		vector4 tv = vector4(1, 1, 1, 1);
+		tv.multiply(vt_matrix, tv);
+
 		glUseProgram(program.id);
 		glBindVertexArray(id);
 
