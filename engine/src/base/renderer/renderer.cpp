@@ -15,18 +15,23 @@ namespace engine
 	void renderer::init()
 	{
 		glEnable(GL_DEPTH_TEST);
-		d_program.init();
-		c.init();
+		d2d_program.init();
+		d3d_program.init();
+		cam.init();
+
+		float cs[4] = { 1, 1, 1, 1 };
+
+		create_cube(1, 20, 15, 30, cs);
 	}
 
 	void renderer::update()
 	{
-		c.update();
+		cam.update();
 	}
 
 	void renderer::draw()
 	{
-		glClearColor(0.75f, 0.75f, 0.75f, 1.0f);
+		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		for (int i = 0; i < tris.size(); i++) // Should eventually loop backwards
@@ -39,25 +44,25 @@ namespace engine
 		}
 		for (int i = 0; i < cubes.size(); i++) // Should eventually loop backwards
 		{
-			cubes[i].draw(c);
+			cubes[i].draw(cam);
 		}
 	}
 
 	uint renderer::create_tri(float vs[6], float cs[3])
 	{
-		tri t_tri = tri(vs, cs, d_program);
+		tri t_tri = tri(vs, cs, d2d_program);
 		tris.push_back(t_tri);
 		return tris.size() - 1;
 	}
 	uint renderer::create_rect(float xp, float yp, float w, float h, float cs[3])
 	{
-		rect t_rect = rect(xp, yp, w, h, cs, d_program);
+		rect t_rect = rect(xp, yp, w, h, cs, d2d_program);
 		rects.push_back(t_rect);
 		return rects.size() - 1;
 	}
 	uint renderer::create_cube(float s, float xp, float yp, float zp, float cs[3])
 	{
-		cube t_cube = cube(s, xp, yp, zp, cs, d_program);
+		cube t_cube = cube(s, xp, yp, zp, cs, d3d_program);
 		cubes.push_back(t_cube);
 		return cubes.size()-1;
 	}

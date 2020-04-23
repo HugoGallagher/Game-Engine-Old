@@ -56,32 +56,86 @@ namespace engine
 			4, 7, 6,
 		};*/
 
-		float verticies[24] =
+		//float verticies[24] =
+		//{
+		//	-hl, -hl, -hl,
+		//	-hl, -hl,  hl,
+		//	-hl,  hl, -hl,
+		//	-hl,  hl,  hl,
+		//	 hl, -hl, -hl,
+		//	 hl, -hl,  hl,
+		//	 hl,  hl, -hl,
+		//	 hl,  hl,  hl,
+		//};
+
+		//uint verts[36] =
+		//{
+		//	0, 1, 2,
+		//	3, 1, 2,
+		//	3, 6, 7,
+		//	3, 2, 6,
+		//	6, 7, 5,
+		//	6, 5, 4,
+		//	0, 1, 5,
+		//	0, 5, 4,
+		//	0, 2, 4,
+		//	6, 2, 4,
+		//	3, 1, 5,
+		//	5, 3, 7,
+		//};
+
+		float verticies[144] =
 		{
-			-hl, -hl,  -hl,
-			-hl, -hl,   hl,
-			-hl,  hl,  -hl,
-			-hl,  hl,   hl,
-			 hl, -hl,  -hl,
-			 hl, -hl,   hl,
-			 hl,  hl,  -hl,
-			 hl,  hl,   hl,
+			-hl, -hl, -hl,  0,  0, -1, // Front
+			-hl,  hl, -hl,  0,  0, -1,
+			 hl, -hl, -hl,  0,  0, -1,
+			 hl,  hl, -hl,  0,  0, -1,
+
+			-hl, -hl,  hl,  0,  0,  1, // Back
+			-hl,  hl,  hl,  0,  0,  1,
+			 hl, -hl,  hl,  0,  0,  1,
+			 hl,  hl,  hl,  0,  0,  1,
+
+			-hl, -hl, -hl, -1,  0,  0, // Left
+			-hl,  hl, -hl, -1,  0,  0,
+			-hl,  hl,  hl, -1,  0,  0,
+			-hl, -hl,  hl, -1,  0,  0,
+
+			 hl, -hl, -hl,  1,  0,  0, // Right
+			 hl,  hl, -hl,  1,  0,  0,
+			 hl,  hl,  hl,  1,  0,  0,
+			 hl, -hl,  hl,  1,  0,  0,
+
+			-hl,  hl, -hl,  0,  1,  0, // Up
+			-hl,  hl,  hl,  0,  1,  0,
+			 hl,  hl, -hl,  0,  1,  0,
+			 hl,  hl,  hl,  0,  1,  0,
+
+			-hl, -hl, -hl,  0, -1,  0, // Down
+			-hl, -hl,  hl,  0, -1,  0,
+			 hl, -hl, -hl,  0, -1,  0,
+			 hl, -hl,  hl,  0, -1,  0,
 		};
 
-		uint verts[36] =
+		uint vis[36] =
 		{
-			0, 1, 2,
-			3, 1, 2,
-			3, 6, 7,
-			3, 2, 6,
-			6, 7, 5,
-			6, 5, 4,
-			0, 1, 5,
-			0, 5, 4,
-			0, 2, 4,
-			6, 2, 4,
-			3, 1, 5,
-			5, 3, 7,
+			0, 1, 3,
+			0, 3, 2,
+
+			4, 5, 7,
+			4, 7, 6,
+
+			8, 9, 10,
+			8, 11, 10,
+
+			12, 13, 14,
+			12, 15, 14,
+
+			16, 17, 19,
+			16, 19, 18,
+
+			20, 21, 23,
+			20, 23, 22,
 		};
 
 		glGenBuffers(1, &b_id);
@@ -94,42 +148,46 @@ namespace engine
 		glBufferData(GL_ARRAY_BUFFER, sizeof(verticies), verticies, GL_STATIC_DRAW);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, e_id);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vis), vis, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 12, (void*)0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 24, (void*)0);
 		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 24, (void*)12);
+		glEnableVertexAttribArray(1);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
 
-	void cube::draw(camera& c)
+	void cube::draw(camera& cam)
 	{
-		t_matrix.transform(translation, scale, rot_x, rot_y, rot_z);
-
-		vt_matrix.multiply(c.v_matrix, t_matrix);
-		vt_matrix.update_data_gl();
-
-		vector4 tv = vector4(1, 1, 1, 1);
-		tv.multiply(vt_matrix, tv);
+		m_matrix.transform(translation, scale, rot_x, rot_y, rot_z);
+		m_matrix.update_data_gl();
+		n_matrix = m_matrix;
+		n_matrix.update_data_gl();
 
 		glUseProgram(program.id);
 		glBindVertexArray(id);
 
-		colour_loc = glGetUniformLocation(program.id, "col");
+		uint colour_loc = glGetUniformLocation(program.id, "o_col");
+		uint l_colour_loc = glGetUniformLocation(program.id, "l_col");
+		uint l_position_loc = glGetUniformLocation(program.id, "l_pos");
+		uint v_position_loc = glGetUniformLocation(program.id, "v_pos");
+		
+		uint m_matrix_loc = glGetUniformLocation(program.id, "m_matrix");
+		uint n_matrix_loc = glGetUniformLocation(program.id, "n_matrix");
+		uint pv_matrix_loc = glGetUniformLocation(program.id, "pv_matrix");
+		uint v_matrix_loc = glGetUniformLocation(program.id, "v_matrix");
+
 		glUniform4f(colour_loc, colour[0], colour[1], colour[2], colour[3]);
+		glUniform4f(l_colour_loc, 1, 1, 1, 1);
+		glUniform3f(l_position_loc, 0, 6, 8);
+		glUniform3f(v_position_loc, -cam.position.x, -cam.position.y, -cam.position.z);
 
-		vt_matrix_loc = glGetUniformLocation(program.id, "vt_matrix");
-		p_matrix_loc = glGetUniformLocation(program.id, "p_matrix");
-
-		glUniformMatrix4fv(vt_matrix_loc, 1, GL_FALSE, &vt_matrix.gldata[0]);
-		glUniformMatrix4fv(p_matrix_loc, 1, GL_FALSE, &c.p_matrix.gldata[0]);
+		glUniformMatrix4fv(m_matrix_loc, 1, GL_FALSE, &m_matrix.gldata[0]);
+		glUniformMatrix4fv(n_matrix_loc, 1, GL_FALSE, &n_matrix.gldata[0]);
+		glUniformMatrix4fv(pv_matrix_loc, 1, GL_FALSE, &cam.pv_matrix.gldata[0]);
 		
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glUniform4f(colour_loc, 0, 0, 0, 1);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		//glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 }

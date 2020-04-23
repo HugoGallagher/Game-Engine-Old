@@ -26,11 +26,11 @@ namespace engine
 		glCompileShader(id);
 
 		int s;
-		char e[256];
+		char e[500];
 		glGetShaderiv(id, GL_COMPILE_STATUS, &s);
 		if (!s)
 		{
-			glGetShaderInfoLog(id, 256, NULL, e);
+			glGetShaderInfoLog(id, 500, NULL, e);
 			std::cout << "Shader error: Compilation failed:\n\t" << e << std::endl;
 		}
 	}

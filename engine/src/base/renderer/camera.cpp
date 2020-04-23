@@ -57,7 +57,9 @@ namespace engine
 		v_matrix.rotate_x(rotation.y);
 		v_matrix.rotate_y(-rotation.x);
 		v_matrix.translate(position);
+		v_matrix.update_data_gl();
 
-		p_matrix.update_data_gl();
+		pv_matrix.multiply(p_matrix, v_matrix);
+		pv_matrix.update_data_gl();
 	}
 }

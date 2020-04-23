@@ -21,11 +21,15 @@ namespace engine
 		std::vector<rect> rects;
 		std::vector<cube> cubes;
 
-		shader d_vshader = shader(GL_VERTEX_SHADER, "vert.v");
-		shader d_fshader = shader(GL_FRAGMENT_SHADER, "frag.f");
-		gl_program d_program = gl_program(d_vshader, d_fshader);
+		shader d2d_vshader = shader(GL_VERTEX_SHADER, "2d/d2d_vert.v");
+		shader d2d_fshader = shader(GL_FRAGMENT_SHADER, "2d/d2d_frag.f");
+		gl_program d2d_program = gl_program(d2d_vshader, d2d_fshader);
 
-		camera c;
+		shader d3d_vshader = shader(GL_VERTEX_SHADER, "3d/d3d_vert.v");
+		shader d3d_fshader = shader(GL_FRAGMENT_SHADER, "3d/d3d_frag.f");
+		gl_program d3d_program = gl_program(d3d_vshader, d3d_fshader);
+
+		camera cam;
 
 		void init();
 		void update();

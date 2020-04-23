@@ -15,11 +15,11 @@ namespace engine
 		glLinkProgram(id);
 
 		int s;
-		char e[256];
+		char e[500];
 		glGetProgramiv(id, GL_LINK_STATUS, &s);
 		if (!s)
 		{
-			glGetShaderInfoLog(id, 256, NULL, e);
+			glGetProgramInfoLog(id, 500, NULL, e);
 			std::cout << "Program error: Linking failed:\n\t" << e << std::endl;
 		}
 

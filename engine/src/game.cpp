@@ -42,7 +42,8 @@ namespace engine
 			}
 		}*/
 
-		c1 = r.create_cube(1.0f, 0.0f, 0.0f, 3.0f, cs);
+		c1 = r.create_cube(10.0f, 0.0f, 0.0f, 0.0f, cs);
+		//c1 = r.create_cube(100.0f, 0.0f, -100.0f, 3.0f, cs);
 		//c2 = r.create_cube(2.0f, -5.0f, 0.0f, 3.0f, cs);
 
 		pl.log(logger::levels::info, "Engine started");
@@ -96,8 +97,9 @@ namespace engine
 		input::update();
 		w.update();
 		r.update();
+		//std::cout << r.c.position.x << ", " << r.c.position.y << ", " << r.c.position.z << std::endl;
 
-		//r.translate_cube(c1, vector3(sin(glfwGetTime()) / 1000, 0.0f, 0.0f));
+		//r.translate_cube(c1, vector3(0.000f, 0.001f, 0.0f));
 		//std::cout << delta_time << std::endl;
 
 		//r.rotate_x_cube(c1, 1 * delta_time);

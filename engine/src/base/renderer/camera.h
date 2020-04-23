@@ -18,12 +18,12 @@ namespace engine
 	public:
 		vector3 UP = vector3(0, 1, 0);
 
-		float speed = 10.0f;
+		float speed = 30.0f;
 		float delta_speed = 0.0f;
 		vector4 velocity;
 		vector2 rotation = vector2(0, 0);
 		vector3 position;
-		matrix4 p_matrix, v_matrix;
+		matrix4 p_matrix, v_matrix, pv_matrix;
 
 		void init();
 		void update();

@@ -29,17 +29,13 @@ namespace engine
 		std::vector<std::vector<float>> coordinates;
 		std::vector<float> colour;
 
-		matrix4 v_matrix, t_matrix, vt_matrix, p_matrix;
-
-		uint colour_loc;
-		uint vt_matrix_loc;
-		uint p_matrix_loc;
+		matrix4 v_matrix, m_matrix, n_matrix;
 
 		gl_program program;
 
 		cube(float s, float xp, float yp, float zp, float cs[3], gl_program p);
 
-		void draw(camera& c);
+		void draw(camera& cam);
 
 		//cube(const cube& c) : id(c.id), b_id(c.b_id), e_id(c.e_id), program(c.program),
 		//                      x(c.x), y(c.y), z(c.z), size(c.size) {}
