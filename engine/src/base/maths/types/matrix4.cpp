@@ -35,7 +35,7 @@ namespace engine
 		//rdata = d;
 	}
 
-	void matrix4::transform(vector3 t, vector3 s, float rx, float ry, float rz)
+	void matrix4::transform(vector3 t, vector3 s, vector3 r)
 	{
 		data =
 		{
@@ -46,9 +46,9 @@ namespace engine
 		};
 
 		translate(t);
-		rotate_x(rx);
-		rotate_y(ry);
-		rotate_z(rz);
+		rotate_x(r.x);
+		rotate_y(r.y);
+		rotate_z(r.z);
 		scale(s);
 	}
 

@@ -2,7 +2,10 @@
 #include "pch.h"
 #include "macros.h"
 
+#include "base/renderer/shapes/shape3.h"
+
 #include "base/renderer/gl_program.h"
+#include "base/renderer/gl_program3.h"
 #include "base/renderer/shader.h"
 #include "base/renderer/camera.h"
 
@@ -12,32 +15,12 @@
 
 namespace engine
 {
-	class DLL cube
+	class DLL cube : public shape3
 	{
 	public:
-		uint id, b_id, e_id;
-		bool active = true;
-		bool textured = false;
+		cube(float cs[3]) { colour = { cs[0] / 255, cs[1] / 255, cs[2] / 255, cs[3] / 255, 255 }; }
+		//void draw(gl_program3& prog, camera& cam);
 
-		float x, y, z;
-		float size;
-
-		vector3 translation;
-		vector3 scale = vector3(1.0f, 1.0f, 1.0f);
-		float rot_x, rot_y, rot_z;
-
-		std::vector<std::vector<float>> coordinates;
-		std::vector<float> colour;
-
-		matrix4 v_matrix, m_matrix, n_matrix;
-
-		gl_program program;
-
-		cube(float s, float xp, float yp, float zp, float cs[3], gl_program p);
-
-		void draw(camera& cam);
-
-		//cube(const cube& c) : id(c.id), b_id(c.b_id), e_id(c.e_id), program(c.program),
-		//                      x(c.x), y(c.y), z(c.z), size(c.size) {}
+		void create_buffer_data(std::vector<float> params) override;
 	};
 }

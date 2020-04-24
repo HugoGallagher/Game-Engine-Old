@@ -1,22 +1,18 @@
 #pragma once
-
 #include "macros.h"
 
-#include <glad/glad.h>
+#include "base/renderer/shapes/shape2.h"
 
 #include "base/renderer/gl_program.h"
 #include "base/renderer/shader.h"
 
+#include <glad/glad.h>
+
 namespace engine
 {
-	class DLL tri
+	class DLL tri : private shape2
 	{
-		//float verticies[6];
 	public:
-		uint id, b_id;
-		bool active = true;
-		bool textured = false;
-
 		std::vector<float> coordinates;
 		std::vector<float> colour;
 

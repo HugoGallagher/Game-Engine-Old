@@ -86,19 +86,8 @@ namespace engine
 
 			for (int i = 0; i < repeat; i++)
 			{
-				m3.transform(vector3(1.0f, 1.0f, 1.0f), vector3(1.0f, 1.0f, 1.0f), 0.0f, 0.0f, 0.0f);
+				m3.transform(vector3(1.0f, 1.0f, 1.0f), vector3(1.0f, 1.0f, 1.0f), vector3(0.0f, 0.0f, 0.0f));
 			}
-			
-			/*for (int i = 0; i < 4; i++)
-			{
-				float v[4];
-				_mm_store_ps(v, m3.data[i]);
-				for (int j = 0; j < 4; j++)
-				{
-					std::cout << v[j] << ", ";
-				}
-				std::cout << std::endl;
-			}*/
 		}
 
 		void benchmark_function2()
@@ -118,7 +107,11 @@ namespace engine
 
 			for (int i = 0; i < repeat; i++)
 			{
-				v = m1 * v;
+				glm::translate(m3, glm::vec3(1, 1, 1));
+				glm::translate(m3, glm::vec3(1, 1, 1));
+				glm::translate(m3, glm::vec3(1, 1, 1));
+				glm::translate(m3, glm::vec3(1, 1, 1));
+				glm::translate(m3, glm::vec3(1, 1, 1));
 			}
 		}
 	};

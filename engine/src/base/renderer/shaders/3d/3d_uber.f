@@ -1,5 +1,15 @@
 #version 450 core
 
+struct material
+{
+	vec3 m_col; // Material colour
+	vec3 s_col; // Specular colour
+	float s_val; // Specular
+	float r_val; // Roughness
+};
+
+uniform material m;
+
 in vec3 o_pos;
 in vec3 normal;
 
@@ -13,7 +23,7 @@ uniform vec4 o_col;
 void main()
 {
 	float specular = 1.0;
-	float roughness = 0.0;
+	float roughness = 200.0;
 
 	vec3 l_dir = normalize(l_pos - o_pos);
 	float d_val = max(dot(l_dir, normal), 0);

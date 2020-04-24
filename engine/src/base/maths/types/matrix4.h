@@ -17,7 +17,7 @@ namespace engine
 		matrix4();
 		matrix4(std::vector<std::vector<float>>& d);
 
-		void transform(vector3 t, vector3 s, float rx, float ry, float rz);
+		void transform(vector3 t, vector3 s, vector3 r);
 
 		void translate(vector3& v);
 		void scale(vector3& v);

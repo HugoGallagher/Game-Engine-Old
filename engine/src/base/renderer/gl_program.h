@@ -12,8 +12,9 @@ namespace engine
 	{
 	public:
 		uint id;
-		shader& vertex_shader, fragment_shader;
+		shader vertex_shader, fragment_shader;
 
+		gl_program() {}
 		gl_program(shader& v, shader& f) : vertex_shader(v), fragment_shader(f) {}
 		
 		void init();

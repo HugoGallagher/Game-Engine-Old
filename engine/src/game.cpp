@@ -16,7 +16,7 @@ namespace engine
 {
 	logger pl = logger();
 	window w = window(WIDTH, HEIGHT, false, "Engine");
-	renderer r;
+	renderer3 r;
 
 	uint c1, c2;
 
@@ -31,7 +31,7 @@ namespace engine
 	{
 		r.init(); // Move these lines to init
 
-		/*for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
 			{
@@ -40,42 +40,16 @@ namespace engine
 					r.create_cube(1, i - 50, j - 50, k + 10 , cs);
 				}
 			}
-		}*/
+		}
 
 		c1 = r.create_cube(10.0f, 0.0f, 0.0f, 0.0f, cs);
-		//c1 = r.create_cube(100.0f, 0.0f, -100.0f, 3.0f, cs);
+		c2 = r.create_cube(100.0f, 0.0f, -100.0f, 3.0f, cs);
 		//c2 = r.create_cube(2.0f, -5.0f, 0.0f, 3.0f, cs);
 
 		pl.log(logger::levels::info, "Engine started");
-		
-		/*matrix4 m1 = matrix4
-		({
-			{ 1.0f, 0.0f, 0.0f, 1.0f, },
-			{ 0.0f, 1.0f, 0.0f, 2.0f, },
-			{ 0.0f, 0.0f, 1.0f, 3.0f, },
-			{ 0.0f, 0.0f, 0.0f, 1.0f, },
-		});
-		matrix4 m2 = matrix4
-		({
-			{ 2.0f, 0.0f, 0.0f, 0.0f, },
-			{ 0.0f, 2.0f, 0.0f, 0.0f, },
-			{ 0.0f, 0.0f, 2.0f, 0.0f, },
-			{ 0.0f, 0.0f, 0.0f, 1.0f, },
-		});
 
-		matrix4 m3 = m1 * m2;
-
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				std::cout << m3.data[i][j] << ", ";
-			}
-			std::cout << std::endl;
-		}*/
-
-		//benchmark bm = benchmark();
-		//bm.run_benchmark();
+		benchmark bm = benchmark();
+		bm.run_benchmark();
 		float c_time = 0.0f;
 		float p_time = 0.0f;
 		while (true)

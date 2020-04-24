@@ -1,6 +1,8 @@
 #pragma once
 #include "macros.h"
 
+#include "base/renderer/shapes/shape2.h"
+
 #include "base/renderer/gl_program.h"
 #include "base/renderer/shader.h"
 
@@ -10,13 +12,9 @@
 
 namespace engine
 {
-	class DLL rect
+	class DLL rect : private shape2
 	{
 	public:
-		uint id, b_id, e_id;
-		bool active = true;
-		bool textured = false;
-
 		float x, y;
 		float width, height;
 
