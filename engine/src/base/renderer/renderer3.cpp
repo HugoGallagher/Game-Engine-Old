@@ -21,7 +21,7 @@ namespace engine
 
 		float cs[4] = { 1, 1, 1, 1 };
 
-		create_cube(1, 0, 6, 8, cs);
+		create_cube(1, 0, 6, 8);
 	}
 
 	void renderer3::update()
@@ -42,9 +42,9 @@ namespace engine
 		}
 	}
 
-	uint renderer3::create_cube(float s, float xp, float yp, float zp, float cs[3])
+	uint renderer3::create_cube(float s, float xp, float yp, float zp)
 	{
-		cube t_cube = cube(cs);
+		cube t_cube = cube();
 		std::vector<float> test = { s };
 		t_cube.init(xp, yp, zp, std::vector<float>(1, s));
 		cubes.push_back(t_cube);
@@ -56,4 +56,5 @@ namespace engine
 	void renderer3::rotate_z_cube(uint id, float d) { cubes[id].rotation.z += d; }
 	void renderer3::scale_cube(uint id, vector3 s) { cubes[id].scale = cubes[id].scale + s; }
 	void renderer3::translate_cube(uint id, vector3 t) { cubes[id].position = cubes[id].position + t; }
+	void renderer3::set_material_cube(uint id, material m) { cubes[id].m = m; }
 }

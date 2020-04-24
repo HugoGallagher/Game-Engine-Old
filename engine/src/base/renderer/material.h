@@ -9,7 +9,7 @@ namespace engine
 	{
 		vector3 m_col; // General
 
-		vector3 s_val; // Specular
+		vector3 s_col; // Specular
 		float s_val, r_val;
 	};
 }

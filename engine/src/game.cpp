@@ -10,6 +10,8 @@
 #include "base/maths/types/matrix.h"
 #include "base/maths/types/matrix4.h"
 
+#include "base/renderer/material.h"
+
 #include "benchmark.h"
 
 namespace engine
@@ -31,7 +33,7 @@ namespace engine
 	{
 		r.init(); // Move these lines to init
 
-		for (int i = 0; i < 10; i++)
+		/*for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
 			{
@@ -40,16 +42,24 @@ namespace engine
 					r.create_cube(1, i - 50, j - 50, k + 10 , cs);
 				}
 			}
-		}
+		}*/
 
-		c1 = r.create_cube(10.0f, 0.0f, 0.0f, 0.0f, cs);
-		c2 = r.create_cube(100.0f, 0.0f, -100.0f, 3.0f, cs);
+		material m;
+		m.m_col = vector3(cs[0], cs[1], cs[2]);
+		m.s_col = vector3(0, 0, 255);
+		m.s_val = 0.8f;
+		m.r_val = 0.3f;
+
+		c1 = r.create_cube(10.0f, 0.0f, 0.0f, 0.0f);
+		c2 = r.create_cube(100.0f, 0.0f, -100.0f, 3.0f);
+		r.set_material_cube(c1, m);
 		//c2 = r.create_cube(2.0f, -5.0f, 0.0f, 3.0f, cs);
 
 		pl.log(logger::levels::info, "Engine started");
 
-		benchmark bm = benchmark();
-		bm.run_benchmark();
+		//benchmark bm = benchmark();
+		//bm.run_benchmark();
+
 		float c_time = 0.0f;
 		float p_time = 0.0f;
 		while (true)

@@ -31,12 +31,13 @@ namespace engine
 		void update();
 		void draw();
 
-		uint create_cube(float s, float xp, float yp, float zp, float cs[3]);
+		uint create_cube(float s, float xp, float yp, float zp);
 
 		void rotate_x_cube(uint id, float d);
 		void rotate_y_cube(uint id, float d);
 		void rotate_z_cube(uint id, float d);
 		void scale_cube(uint id, vector3 s);
 		void translate_cube(uint id, vector3 t);
+		void set_material_cube(uint id, material m);
 	};
 }
