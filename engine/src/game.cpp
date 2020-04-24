@@ -46,7 +46,7 @@ namespace engine
 
 		material m;
 		m.m_col = vector3(cs[0], cs[1], cs[2]);
-		m.s_col = vector3(0, 0, 255);
+		m.s_col = vector3(cs[0], cs[1], cs[2]);
 		m.s_val = 0.8f;
 		m.r_val = 0.3f;
 

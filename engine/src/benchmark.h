@@ -7,10 +7,10 @@
 
 #include "base/maths/types/vector4.h"
 #include "base/maths/types/matrix4.h"
-#include "mat4x4.hpp"
-#include "matrix.hpp"
+#include "glm/mat4x4.hpp"
+#include "glm/matrix.hpp"
 
-#include <gtc/matrix_transform.hpp>
+#include "glm/gtc/matrix_transform.hpp"
 
 namespace engine
 {

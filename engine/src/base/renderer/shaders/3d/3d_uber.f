@@ -31,5 +31,4 @@ void main()
 	float s_val = m.s_val * pow(max(dot(v_dir, r_dir), 0), (1 - m.r_val) * 256);
 
 	colour = vec4((m.m_col * (d_val + a_val)) + m.s_col * s_val, 1);
-	//colour = vec4(m.m_col, 1);
 }
