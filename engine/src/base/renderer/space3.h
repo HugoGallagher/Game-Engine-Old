@@ -23,6 +23,7 @@ namespace engine
 
 		std::vector<std::shared_ptr<cube>> cubes;
 		std::vector<point_light> point_lights;
+		std::vector<dir_light> dir_lights;
 
 		gl_program3 d3d_program = gl_program3();
 
@@ -31,8 +32,10 @@ namespace engine
 		void update();
 		void draw(camera& cam);
 
+		void uniforms(camera& cam);
+
 		std::shared_ptr<cube> create_cube(float s, float xp, float yp, float zp);
 
-		void gen_point_lights();
+		void gen_lights();
 	};
 }

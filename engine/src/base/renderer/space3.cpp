@@ -8,21 +8,29 @@ namespace engine
 	{
 		glGenBuffers(1, &ss_id);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ss_id);
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 5, ss_id);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, ss_id);
 		//glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 
 		point_light pl1;
 		pl1.pos = { 0, 10, 7 };
-		pl1.str = 5;
 		pl1.col = { 1, 1, 1 };
+		pl1.str = 5;
 		point_light pl2;
 		pl2.pos = { 0, -10, 0 };
-		pl2.str = 10;
 		pl2.col = { 1, 1, 1 };
+		pl2.str = 10;
+
+		dir_light dl1;
+		dl1.dir = { 0, -1, 0 };
+		dl1.col = { 1, 1, 1 };
+		dl1.str = 1;
 
 		point_lights.push_back(pl1);
 		point_lights.push_back(pl2);
-		gen_point_lights();
+
+		dir_lights.push_back(dl1);
+
+		gen_lights();
 
 		d3d_program.init();
 	}
@@ -32,6 +40,8 @@ namespace engine
 	void space3::draw(camera& cam)
 	{
 		glUseProgram(d3d_program.id);
+
+		uniforms(cam);
 
 		for (int i = 0; i < cubes.size(); i++)
 		{
@@ -50,23 +60,48 @@ namespace engine
 		return t_cube_ptr;
 	}
 
-	void space3::gen_point_lights()
+	void space3::uniforms(camera& cam)
+	{
+		uint v_position_loc = glGetUniformLocation(d3d_program.id, "v_pos");
+		glUniform3f(v_position_loc, -cam.position.x, -cam.position.y, -cam.position.z);
+
+		uint pv_matrix_loc = glGetUniformLocation(d3d_program.id, "pv_matrix");
+		glUniformMatrix4fv(pv_matrix_loc, 1, GL_FALSE, &cam.pv_matrix.gldata[0]);
+	}
+
+	void space3::gen_lights()
 	{
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ss_id);
-		std::vector<float> float_point_lights(0);
+		std::vector<float> float_lights(0);
 
 		for (int i = 0; i < point_lights.size(); i++)
 		{
-			float_point_lights.push_back(point_lights[i].pos.x);
-			float_point_lights.push_back(point_lights[i].pos.y);
-			float_point_lights.push_back(point_lights[i].pos.z);
-			
-			float_point_lights.push_back(point_lights[i].col.x);
-			float_point_lights.push_back(point_lights[i].col.y);
-			float_point_lights.push_back(point_lights[i].col.z);
+			float_lights.push_back(0);
 
-			float_point_lights.push_back(point_lights[i].str);
+			float_lights.push_back(point_lights[i].pos.x);
+			float_lights.push_back(point_lights[i].pos.y);
+			float_lights.push_back(point_lights[i].pos.z);
+
+			float_lights.push_back(point_lights[i].col.x);
+			float_lights.push_back(point_lights[i].col.y);
+			float_lights.push_back(point_lights[i].col.z);
+
+			float_lights.push_back(point_lights[i].str);
 		}
-		glBufferData(GL_SHADER_STORAGE_BUFFER, float_point_lights.size() * 4, &float_point_lights[0], GL_STATIC_READ);
+		for (int i = 0; i < dir_lights.size(); i++)
+		{
+			float_lights.push_back(1);
+
+			float_lights.push_back(dir_lights[i].dir.x);
+			float_lights.push_back(dir_lights[i].dir.y);
+			float_lights.push_back(dir_lights[i].dir.z);
+
+			float_lights.push_back(dir_lights[i].col.x);
+			float_lights.push_back(dir_lights[i].col.y);
+			float_lights.push_back(dir_lights[i].col.z);
+
+			float_lights.push_back(dir_lights[i].str);
+		}
+		glBufferData(GL_SHADER_STORAGE_BUFFER, float_lights.size() * 4, &float_lights[0], GL_STATIC_READ);
 	}
 }
