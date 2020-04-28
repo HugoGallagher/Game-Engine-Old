@@ -4,43 +4,48 @@
 
 namespace engine
 {
-	void cube::create_buffer_data(std::vector<float> params)
+	void cube::create_buffer_data(std::vector<void*> params)
 	{
+		if (textured)
+		{
+			t.load();
+		}
+
 		n_vs = 36;
 
-		float hl = params[0] / 2;
+		float hl = *(float*)params[0] / 2;
 
-		float verticies[144] =
+		float verticies[192] =
 		{
-			-hl, -hl, -hl,  0,  0, -1, // Front
-			-hl,  hl, -hl,  0,  0, -1,
-			 hl, -hl, -hl,  0,  0, -1,
-			 hl,  hl, -hl,  0,  0, -1,
+			-hl, -hl, -hl,  0,  0, -1, 0.0f, 0.0f, // Front
+			-hl,  hl, -hl,  0,  0, -1, 0.0f, 1.0f,
+			 hl, -hl, -hl,  0,  0, -1, 1.0f, 0.0f,
+			 hl,  hl, -hl,  0,  0, -1, 1.0f, 1.0f,
 
-			-hl, -hl,  hl,  0,  0,  1, // Back
-			-hl,  hl,  hl,  0,  0,  1,
-			 hl, -hl,  hl,  0,  0,  1,
-			 hl,  hl,  hl,  0,  0,  1,
+			-hl, -hl,  hl,  0,  0,  1, 0.0f, 0.0f, // Back
+			-hl,  hl,  hl,  0,  0,  1, 0.0f, 1.0f,
+			 hl, -hl,  hl,  0,  0,  1, 1.0f, 0.0f,
+			 hl,  hl,  hl,  0,  0,  1, 1.0f, 1.0f,
 
-			-hl, -hl, -hl, -1,  0,  0, // Left
-			-hl,  hl, -hl, -1,  0,  0,
-			-hl,  hl,  hl, -1,  0,  0,
-			-hl, -hl,  hl, -1,  0,  0,
+			-hl, -hl, -hl, -1,  0,  0, 1.0f, 0.0f, // Left
+			-hl,  hl, -hl, -1,  0,  0, 0.0f, 0.0f,
+			-hl,  hl,  hl, -1,  0,  0, 0.0f, 1.0f,
+			-hl, -hl,  hl, -1,  0,  0, 1.0f, 1.0f,
 
-			 hl, -hl, -hl,  1,  0,  0, // Right
-			 hl,  hl, -hl,  1,  0,  0,
-			 hl,  hl,  hl,  1,  0,  0,
-			 hl, -hl,  hl,  1,  0,  0,
+			 hl, -hl, -hl,  1,  0,  0, 1.0f, 0.0f, // Right
+			 hl,  hl, -hl,  1,  0,  0, 0.0f, 0.0f,
+			 hl,  hl,  hl,  1,  0,  0, 0.0f, 1.0f,
+			 hl, -hl,  hl,  1,  0,  0, 1.0f, 1.0f,
 
-			-hl,  hl, -hl,  0,  1,  0, // Up
-			-hl,  hl,  hl,  0,  1,  0,
-			 hl,  hl, -hl,  0,  1,  0,
-			 hl,  hl,  hl,  0,  1,  0,
+			-hl,  hl, -hl,  0,  1,  0, 0.0f, 0.0f, // Up
+			-hl,  hl,  hl,  0,  1,  0, 0.0f, 1.0f,
+			 hl,  hl, -hl,  0,  1,  0, 1.0f, 0.0f,
+			 hl,  hl,  hl,  0,  1,  0, 1.0f, 1.0f,
 
-			-hl, -hl, -hl,  0, -1,  0, // Down
-			-hl, -hl,  hl,  0, -1,  0,
-			 hl, -hl, -hl,  0, -1,  0,
-			 hl, -hl,  hl,  0, -1,  0,
+			-hl, -hl, -hl,  0, -1,  0, 0.0f, 0.0f, // Down
+			-hl, -hl,  hl,  0, -1,  0, 0.0f, 1.0f,
+			 hl, -hl, -hl,  0, -1,  0, 1.0f, 0.0f,
+			 hl, -hl,  hl,  0, -1,  0, 1.0f, 1.0f,
 		};
 
 		uint vis[36] =
@@ -70,9 +75,11 @@ namespace engine
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, e_id);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vis), vis, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 24, (void*)0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 32, (void*)0);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 24, (void*)12);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 32, (void*)12);
 		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 32, (void*)24);
+		glEnableVertexAttribArray(2);
 	}
 }

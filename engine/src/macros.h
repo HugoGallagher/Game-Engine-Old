@@ -10,3 +10,4 @@
 #define FOV 60.0f
 
 typedef unsigned int uint;
+typedef unsigned char uchar;

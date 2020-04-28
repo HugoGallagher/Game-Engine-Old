@@ -31,6 +31,10 @@ namespace engine
 
 		window(unsigned int w, unsigned int h, bool v, const char* t) : _width(w), _height(h), _vsync(v), _title(t)
 		{
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+
 			glfwInit();
 
 			_window = glfwCreateWindow(_width, _height, _title, NULL, NULL);

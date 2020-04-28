@@ -2,7 +2,7 @@
 
 namespace engine
 {
-	void shape3::init(float xp, float yp, float zp, std::vector<float> params)
+	void shape3::init(float xp, float yp, float zp, std::vector<void*> params)
 	{
 		position = vector3(xp, yp, zp);
 
@@ -59,5 +59,11 @@ namespace engine
 		glUniform3f(m_s_col_loc, m.s_col.x / 255, m.s_col.y / 255, m.s_col.z / 255);
 		glUniform1f(m_s_val_loc, m.s_val);
 		glUniform1f(m_r_val_loc, m.r_val);
+
+		uint s_texture_loc = glGetUniformLocation(prog.id, "s_tex");
+		glUniform1f(s_texture_loc, 0.5);
+
+		if (textured)
+			t.bind();
 	}
 }

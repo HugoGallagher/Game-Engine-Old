@@ -7,6 +7,7 @@
 #include "base/renderer/shader.h"
 #include "base/renderer/camera.h"
 #include "base/renderer/material.h"
+#include "base/renderer/texture.h"
 
 #include "base/maths/types/matrix4.h"
 #include "base/maths/types/vector4.h"
@@ -17,10 +18,12 @@ namespace engine
 	class DLL shape3
 	{
 	public:
-		uint id, b_id, e_id;
+		uint id, b_id, e_id, t_id;
 		bool active = true;
-		bool textured = false;
 		uint n_vs;
+
+		bool textured = true;
+		texture t;
 
 		std::vector<float> colour; // Temp
 
@@ -32,11 +35,11 @@ namespace engine
 		material m;
 
 		shape3() {}
-		void init(float xp, float yp, float zp, std::vector<float> params);
+		void init(float xp, float yp, float zp, std::vector<void*> params);
 
 		void draw(gl_program3& prog, camera& cam);
 
-		virtual void create_buffer_data(std::vector<float> params) {}
+		virtual void create_buffer_data(std::vector<void*> params) {}
 
 		void uniforms(gl_program3& prog, camera& cam);
 	};

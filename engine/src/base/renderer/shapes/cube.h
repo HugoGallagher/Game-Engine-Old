@@ -21,6 +21,6 @@ namespace engine
 		//cube(float cs[3]) { colour = { cs[0] / 255, cs[1] / 255, cs[2] / 255, cs[3] / 255, 255 }; }
 		//void draw(gl_program3& prog, camera& cam);
 
-		void create_buffer_data(std::vector<float> params) override;
+		void create_buffer_data(std::vector<void*> params) override;
 	};
 }

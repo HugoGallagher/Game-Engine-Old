@@ -11,6 +11,7 @@
 #include "base/maths/types/matrix4.h"
 
 #include "base/renderer/material.h"
+#include "base/renderer/shapes/cube.h"
 
 #include "benchmark.h"
 
@@ -20,7 +21,7 @@ namespace engine
 	window w = window(WIDTH, HEIGHT, false, "Engine");
 	renderer3 r;
 
-	uint c1, c2;
+	std::shared_ptr<cube> c1, c2;
 
 	float cs[3] = { 142.0f, 73.0f, 205.0f };
 	//float cs[3] = { 255.0f, 255.0f, 255.0f };
@@ -50,9 +51,9 @@ namespace engine
 		m.s_val = 0.8f;
 		m.r_val = 0.3f;
 
-		c1 = r.create_cube(10.0f, 0.0f, 0.0f, 0.0f);
-		c2 = r.create_cube(100.0f, 0.0f, -100.0f, 3.0f);
-		r.set_material_cube(c1, m);
+		c1 = r.space.create_cube(10.0f, 0.0f, 0.0f, 0.0f);
+		c2 = r.space.create_cube(100.0f, 0.0f, -100.0f, 3.0f);
+		c1->m = m;
 		//c2 = r.create_cube(2.0f, -5.0f, 0.0f, 3.0f, cs);
 
 		pl.log(logger::levels::info, "Engine started");
