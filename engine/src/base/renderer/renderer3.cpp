@@ -14,7 +14,6 @@ namespace engine
 {
 	void renderer3::init()
 	{
-		glEnable(GL_DEPTH_TEST);
 		cam.init();
 		space.init();
 

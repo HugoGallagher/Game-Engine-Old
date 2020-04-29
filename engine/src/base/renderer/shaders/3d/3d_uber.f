@@ -88,4 +88,5 @@ void main()
 		}
 	}
 	colour = vec4(l_val, 1);
+	//colour = vec4(1, 1, 1, 1);
 }

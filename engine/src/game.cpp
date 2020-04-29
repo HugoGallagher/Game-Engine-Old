@@ -51,8 +51,8 @@ namespace engine
 		m.s_val = 0.8f;
 		m.r_val = 0.3f;
 
-		c1 = r.space.create_cube(10.0f, 0.0f, 0.0f, 0.0f);
-		c2 = r.space.create_cube(100.0f, 0.0f, -100.0f, 3.0f);
+		c1 = r.space.create_cube(10.0f, 0.0f, 0.0f, 10.0f);
+		//c2 = r.space.create_cube(100.0f, 0.0f, -100.0f, 3.0f);
 		c1->m = m;
 		//c2 = r.create_cube(2.0f, -5.0f, 0.0f, 3.0f, cs);
 

@@ -21,7 +21,7 @@ namespace engine
 		pl2.str = 10;
 
 		dir_light dl1;
-		dl1.dir = { 0, -1, 0 };
+		dl1.dir = { 0, -1, -0.25 };
 		dl1.col = { 1, 1, 1 };
 		dl1.str = 1;
 
