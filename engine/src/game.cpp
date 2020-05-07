@@ -50,10 +50,16 @@ namespace engine
 		m.s_col = vector3(cs[0], cs[1], cs[2]);
 		m.s_val = 0.8f;
 		m.r_val = 0.3f;
+		m.t_val = 1;
+
+		std::vector<float> oc = { 1, 1, 1 };
 
 		c1 = r.space.create_cube(10.0f, 0.0f, 0.0f, 10.0f);
+		c1->enable_outline(oc, 0.1);
 		//c2 = r.space.create_cube(100.0f, 0.0f, -100.0f, 3.0f);
-		c1->m = m;
+
+		c1->update_material(m);
+
 		//c2 = r.create_cube(2.0f, -5.0f, 0.0f, 3.0f, cs);
 
 		pl.log(logger::levels::info, "Engine started");
@@ -86,6 +92,10 @@ namespace engine
 
 		//r.translate_cube(c1, vector3(0.000f, 0.001f, 0.0f));
 		//std::cout << delta_time << std::endl;
+
+		//c1->rotation.x += 1 * delta_time;
+		//c1->rotation.y += 1 * delta_time;
+		//c1->rotation.z += 1 * delta_time;
 
 		//r.rotate_x_cube(c1, 1 * delta_time);
 		//r.rotate_y_cube(c1, 1 * delta_time);

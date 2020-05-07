@@ -4,7 +4,7 @@
 
 #include <glad/glad.h>
 
-#include "base/renderer/shader.h"
+#include "base/renderer/opengl/shader.h"
 
 namespace engine
 {

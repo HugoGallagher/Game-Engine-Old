@@ -4,8 +4,9 @@
 
 #include <glad/glad.h>
 
-#include "base/renderer/gl_program.h"
-#include "base/renderer/shader.h"
+#include "base/renderer/opengl/gl_program.h"
+#include "base/renderer/opengl/shader.h"
+
 #include "base/renderer/shapes/tri.h"
 #include "base/renderer/shapes/rect.h"
 #include "base/renderer/shapes/cube.h"
@@ -16,6 +17,8 @@ namespace engine
 	{
 		cam.init();
 		space.init();
+
+		fb.init();
 
 		float cs[4] = { 1, 1, 1, 1 };
 
@@ -30,9 +33,10 @@ namespace engine
 
 	void renderer3::draw()
 	{
-		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		fb.draw_start();
 
 		space.draw(cam);
+
+		fb.draw_end();
 	}
 }

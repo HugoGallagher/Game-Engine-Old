@@ -3,8 +3,8 @@
 
 #include "base/renderer/shapes/shape2.h"
 
-#include "base/renderer/gl_program.h"
-#include "base/renderer/shader.h"
+#include "base/renderer/opengl/gl_program.h"
+#include "base/renderer/opengl/shader.h"
 
 #include <glad/glad.h>
 

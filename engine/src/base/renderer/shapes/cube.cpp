@@ -6,9 +6,9 @@ namespace engine
 {
 	void cube::create_buffer_data(std::vector<void*> params)
 	{
-		if (textured)
+		if (m.textured)
 		{
-			t.load();
+			m.tex.load();
 		}
 
 		n_vs = 36;

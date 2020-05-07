@@ -33,6 +33,7 @@ namespace engine
 		gen_lights();
 
 		d3d_program.init();
+		o3d_program.init();
 	}
 
 	void space3::update() {}
@@ -45,7 +46,7 @@ namespace engine
 
 		for (int i = 0; i < cubes.size(); i++)
 		{
-			cubes[i]->draw(d3d_program, cam);
+			cubes[i]->draw(d3d_program, o3d_program, cam);
 		}
 	}
 

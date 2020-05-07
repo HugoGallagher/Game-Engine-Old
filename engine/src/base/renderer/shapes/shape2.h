@@ -2,8 +2,9 @@
 #include "pch.h"
 #include "macros.h"
 
-#include "base/renderer/gl_program2.h"
-#include "base/renderer/shader.h"
+#include "base/renderer/opengl/gl_program2.h"
+#include "base/renderer/opengl/shader.h"
+
 #include "base/renderer/camera.h"
 
 #include "base/maths/types/matrix4.h"

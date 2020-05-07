@@ -50,8 +50,13 @@ namespace engine
 			gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
 			//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			glEnable(GL_DEPTH_TEST);
+			/*glEnable(GL_DEPTH_TEST);
 			glEnable(GL_CULL_FACE);
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+			glEnable(GL_STENCIL_TEST);
+			glStencilMask(0xFF);*/
 		}
 
 		//~window() {}
